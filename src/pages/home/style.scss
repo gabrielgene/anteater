@@ -1,0 +1,8 @@
+@import '../../scss/variables';
+
+.Home {
+  background-color: yellow;
+  &-grid {
+    height: calc(100vh - #{$spacer*3});
+  }
+}
