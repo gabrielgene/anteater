@@ -1,8 +1,11 @@
 @import '../../scss/variables';
 
 .Home {
-  background-color: yellow;
   &-grid {
-    height: calc(100vh - #{$spacer*3});
+    height: calc(100vh + 1rem);
+    &-map {
+      padding-bottom: 0 !important;
+      padding-right: 0 !important;
+    }
   }
 }

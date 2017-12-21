@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Menu } from 'semantic-ui-react';
+import Map from '../../components/map';
 
 import './style.css';
 
@@ -9,10 +10,10 @@ const Home = () => (
       <Menu.Item header>Anteater</Menu.Item>
     </Menu>
     <Grid className="Home-grid">
-      <Grid.Column width={10} color="red">
-        Map
+      <Grid.Column className="Home-grid-map" width={11}>
+        <Map />
       </Grid.Column>
-      <Grid.Column width={6} color="blue">
+      <Grid.Column width={5} color="blue">
         Sideview
       </Grid.Column>
     </Grid>
