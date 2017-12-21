@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import Target from './target';
+import './style.css';
+
+const defaultCenter = { lat: -12.9722, lng: -38.5014 };
 
 class Map extends Component {
   static defaultProps = {
-    center: {lat: 59.95, lng: 30.33},
-    zoom: 11
+    center: defaultCenter,
+    zoom: 14,
   };
 
   render() {
     return (
-      <GoogleMapReact
-        defaultCenter={this.props.center}
-        defaultZoom={this.props.zoom}
-      >
-        <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text={'Kreyser Avrora'}
-        />
-      </GoogleMapReact>
+      <div className="Map">
+        <GoogleMapReact
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
+        >
+        </GoogleMapReact>
+        <Target />
+      </div>
     );
   }
 }
