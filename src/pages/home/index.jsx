@@ -24,7 +24,12 @@ class Home extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getDataRequest();
+    setInterval(() => this.getDataRequest(), 30000);
+  }
+
+  async getDataRequest() {
     const data = await getData();
     this.setState({
       markers: data,
@@ -58,31 +63,31 @@ class Home extends Component {
 
     return (
       <div className="Home">
-          <Menu fixed='top' inverted borderless>
-            <Menu.Item header>Anteater</Menu.Item>
-          </Menu>
-          <Grid className="Home-grid">
-            <Grid.Column className="Home-grid-map" width={11}>
-              <Map
-                onChange={this.handleMapChange}
-                center={center}
-                zoom={zoom}
-                markers={markers}
-              />
-            </Grid.Column>
-            <Grid.Column
-              className="Home-grid-sideview"
-              width={5}
-              color="blue"
-            >
-              <SideView
-                onSubmit={this.handleSubmit}
-                onChangeWeather={this.handleSelectWeather}
-                selectedWeather={selectedWeather}
-              />
-            </Grid.Column>
-          </Grid>
-        </div>
+        <Menu fixed='top' inverted borderless>
+          <Menu.Item header>Anteater</Menu.Item>
+        </Menu>
+        <Grid className="Home-grid">
+          <Grid.Column className="Home-grid-map" width={11}>
+            <Map
+              onChange={this.handleMapChange}
+              center={center}
+              zoom={zoom}
+              markers={markers}
+            />
+          </Grid.Column>
+          <Grid.Column
+            className="Home-grid-sideview"
+            width={5}
+            color="blue"
+          >
+            <SideView
+              onSubmit={this.handleSubmit}
+              onChangeWeather={this.handleSelectWeather}
+              selectedWeather={selectedWeather}
+            />
+          </Grid.Column>
+        </Grid>
+      </div>
     )
   }
 }
