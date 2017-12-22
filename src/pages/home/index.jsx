@@ -3,7 +3,7 @@ import autoBind from 'react-autobind';
 import { Grid, Menu } from 'semantic-ui-react';
 
 import Map from '../../components/map';
-import WeatherSelect from '../../components/weather-select/index'
+import SideView from '../../components/side-view';
 
 import './style.css';
 
@@ -15,33 +15,32 @@ class Home extends Component {
     super(props);
     autoBind(this);
     this.state = {
+      selectedWeather: null,
       center: defaultCenter,
       zoom: defaultZoom,
       markers: [],
     };
   }
 
+  handleSubmit() {
+
+  }
+
   handleMapChange(e) {
-    console.log({ e });
-    console.log('markers: ', this.state.markers);
-
     const { center, zoom } = e;
-
-    this.setState({
-      center,
-      zoom,
-      // markers: this.state.markers.concat({ lat: center.lat, lng: center.lng }),
-    })
+    this.setState({ center, zoom })
   }
 
-  handleSelectWeather(e) {
-    console.log('select weather: ', e);
+  handleSelectWeather(_, { value: selectedWeather }) {
+    console.log('lbli', { selectedWeather });
+    this.setState({ selectedWeather });
   }
-
 
   render() {
 
-    const { center, markers, zoom } = this.state;
+    const { center, markers, zoom, selectedWeather } = this.state;
+
+    console.log({ selectedWeather });
 
     return (
       <div className="Home">
@@ -57,8 +56,16 @@ class Home extends Component {
                 markers={markers}
               />
             </Grid.Column>
-            <Grid.Column width={5} color="blue">
-              <WeatherSelect onChange={this.handleSelectWeather} />
+            <Grid.Column
+              className="Home-grid-sideview"
+              width={5}
+              color="blue"
+            >
+              <SideView
+                onSubmit={this.handleSubmit}
+                onChangeWeather={this.handleSelectWeather}
+                selectedWeather={selectedWeather}
+              />
             </Grid.Column>
           </Grid>
         </div>

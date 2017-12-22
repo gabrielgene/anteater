@@ -3,9 +3,14 @@
 .Home {
   &-grid {
     height: calc(100vh + 1rem);
+
     &-map {
       padding-bottom: 0 !important;
       padding-right: 0 !important;
+    }
+
+    &-sideview {
+      padding: $spacer*2;
     }
   }
 }
