@@ -26,7 +26,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.getDataRequest();
-    setInterval(() => this.getDataRequest(), 30000);
+    setInterval(() => this.getDataRequest(), 5000);
   }
 
   async getDataRequest() {
