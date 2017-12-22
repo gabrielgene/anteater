@@ -5,6 +5,8 @@ import { Grid, Menu } from 'semantic-ui-react';
 import Map from '../../components/map';
 import SideView from '../../components/side-view';
 
+import { postData, getData } from '../../fetches';
+
 import './style.css';
 
 const defaultCenter = { lat: -12.9722, lng: -38.5014 };
@@ -23,7 +25,7 @@ class Home extends Component {
   }
 
   handleSubmit() {
-
+    postData({ weather: this.state.selectedWeather });
   }
 
   handleMapChange(e) {
@@ -32,15 +34,12 @@ class Home extends Component {
   }
 
   handleSelectWeather(_, { value: selectedWeather }) {
-    console.log('lbli', { selectedWeather });
     this.setState({ selectedWeather });
   }
 
   render() {
 
     const { center, markers, zoom, selectedWeather } = this.state;
-
-    console.log({ selectedWeather });
 
     return (
       <div className="Home">
