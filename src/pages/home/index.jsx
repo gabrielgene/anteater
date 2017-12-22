@@ -1,103 +1,75 @@
-import React from 'react'
-import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import autoBind from 'react-autobind';
+import { Grid, Menu } from 'semantic-ui-react';
 
-const Home = () => (
-  <div>
-    <Menu fixed='top' inverted>
-      <Container>
-        <Menu.Item as='a' header>
-          <Image
-            size='mini'
-            src='/logo.png'
-            style={{ marginRight: '1.5em' }}
-          />
-          Project Name
-        </Menu.Item>
-        <Menu.Item as='a'>Home</Menu.Item>
+import Map from '../../components/map';
+import SideView from '../../components/side-view';
 
-        <Dropdown item simple text='Dropdown'>
-          <Dropdown.Menu>
-            <Dropdown.Item>List Item</Dropdown.Item>
-            <Dropdown.Item>List Item</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Header>Header Item</Dropdown.Header>
-            <Dropdown.Item>
-              <i className='dropdown icon' />
-              <span className='text'>Submenu</span>
-              <Dropdown.Menu>
-                <Dropdown.Item>List Item</Dropdown.Item>
-                <Dropdown.Item>List Item</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown.Item>
-            <Dropdown.Item>List Item</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </Container>
-    </Menu>
+import { postData, getData } from '../../fetches';
 
-    <Container text style={{ marginTop: '7em' }}>
-      <Header as='h1'>Semantic UI React Fixed Template</Header>
-      <p>This is a basic fixed menu template using fixed size containers.</p>
-      <p>A text container is used for the main container, which is useful for single column layouts.</p>
-    </Container>
+import './style.css';
 
-    <Segment
-      inverted
-      vertical
-      style={{ margin: '5em 0em 0em', padding: '5em 0em' }}
-    >
-      <Container textAlign='center'>
-        <Grid divided inverted stackable>
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Header inverted as='h4' content='Group 1' />
-              <List link inverted>
-                <List.Item as='a'>Link One</List.Item>
-                <List.Item as='a'>Link Two</List.Item>
-                <List.Item as='a'>Link Three</List.Item>
-                <List.Item as='a'>Link Four</List.Item>
-              </List>
+const defaultCenter = { lat: -12.9722, lng: -38.5014 };
+const defaultZoom = 14;
+
+class Home extends Component {
+  constructor(props: Props) {
+    super(props);
+    autoBind(this);
+    this.state = {
+      selectedWeather: null,
+      center: defaultCenter,
+      zoom: defaultZoom,
+      markers: [],
+    };
+  }
+
+  handleSubmit() {
+    postData({ weather: this.state.selectedWeather });
+  }
+
+  handleMapChange(e) {
+    const { center, zoom } = e;
+    this.setState({ center, zoom })
+  }
+
+  handleSelectWeather(_, { value: selectedWeather }) {
+    this.setState({ selectedWeather });
+  }
+
+  render() {
+
+    const { center, markers, zoom, selectedWeather } = this.state;
+
+    return (
+      <div className="Home">
+          <Menu fixed='top' inverted borderless>
+            <Menu.Item header>Anteater</Menu.Item>
+          </Menu>
+          <Grid className="Home-grid">
+            <Grid.Column className="Home-grid-map" width={11}>
+              <Map
+                onChange={this.handleMapChange}
+                center={center}
+                zoom={zoom}
+                markers={markers}
+              />
             </Grid.Column>
-            <Grid.Column width={3}>
-              <Header inverted as='h4' content='Group 2' />
-              <List link inverted>
-                <List.Item as='a'>Link One</List.Item>
-                <List.Item as='a'>Link Two</List.Item>
-                <List.Item as='a'>Link Three</List.Item>
-                <List.Item as='a'>Link Four</List.Item>
-              </List>
+            <Grid.Column
+              className="Home-grid-sideview"
+              width={5}
+              color="blue"
+            >
+              <SideView
+                onSubmit={this.handleSubmit}
+                onChangeWeather={this.handleSelectWeather}
+                selectedWeather={selectedWeather}
+              />
             </Grid.Column>
-            <Grid.Column width={3}>
-              <Header inverted as='h4' content='Group 3' />
-              <List link inverted>
-                <List.Item as='a'>Link One</List.Item>
-                <List.Item as='a'>Link Two</List.Item>
-                <List.Item as='a'>Link Three</List.Item>
-                <List.Item as='a'>Link Four</List.Item>
-              </List>
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Header inverted as='h4' content='Footer Header' />
-              <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-
-        <Divider inverted section />
-        <Image
-          centered
-          size='mini'
-          src='/logo.png'
-        />
-        <List horizontal inverted divided link>
-          <List.Item as='a' href='#'>Site Map</List.Item>
-          <List.Item as='a' href='#'>Contact Us</List.Item>
-          <List.Item as='a' href='#'>Terms and Conditions</List.Item>
-          <List.Item as='a' href='#'>Privacy Policy</List.Item>
-        </List>
-      </Container>
-    </Segment>
-  </div>
-)
+          </Grid>
+        </div>
+    )
+  }
+}
 
 export default Home;
