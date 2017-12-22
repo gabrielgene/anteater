@@ -24,8 +24,23 @@ class Home extends Component {
     };
   }
 
-  handleSubmit() {
-    postData({ weather: this.state.selectedWeather });
+  async componentDidMount() {
+    const data = await getData();
+    this.setState({
+      markers: data,
+    });
+  }
+
+  async handleSubmit() {
+    const newMarker = await postData({
+      weather: this.state.selectedWeather,
+      coords: this.state.center,
+      zoom: this.state.zoom,
+    });
+
+    this.setState({
+      markers: this.state.markers.concat(newMarker),
+    });
   }
 
   handleMapChange(e) {

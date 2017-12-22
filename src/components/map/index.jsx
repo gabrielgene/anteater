@@ -7,8 +7,6 @@ import Target from './target';
 import MapMarker from './marker'
 
 import './style.css';
-import marker from './marker';
-
 
 class Map extends Component {
   constructor(props: Props) {
@@ -18,7 +16,7 @@ class Map extends Component {
 
   renderMarkers() {
     return this.props.markers.map((marker, i) => (
-      <MapMarker key={i} {...marker} />
+      <MapMarker key={i} lat={marker.coords.lat} lng={marker.coords.lng} weather={marker.weather} />
     ));
   }
 
@@ -26,8 +24,9 @@ class Map extends Component {
     return (
       <div className="Map">
         <GoogleMapReact
+          bootstrapURLKeys={{ key: 'AIzaSyCTHC292k7auCCGhM_9wK-ArWjNAxz80Z8' }}
           onChange={this.props.onChange}
-          defaultCenter={this.props.center}
+          center={this.props.center}
           defaultZoom={this.props.zoom}
         >
           {this.renderMarkers()}

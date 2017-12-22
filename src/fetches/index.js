@@ -12,8 +12,7 @@ const createErrorHandler = defaultValue => res => {
   return defaultValue;
 };
 
-export const postData = (data) => {
-  return fetch(url, {
+export const postData = (data) => { return fetch(url, {
     credentials: 'same-origin',
     method: 'post',
     headers: {
