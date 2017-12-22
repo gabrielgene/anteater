@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
-import { Grid, Menu } from 'semantic-ui-react';
+import { Grid, Menu, Image } from 'semantic-ui-react';
 
 import Map from '../../components/map';
 import SideView from '../../components/side-view';
@@ -63,7 +63,8 @@ class Home extends Component {
 
     return (
       <div className="Home">
-        <Menu fixed='top' inverted borderless>
+        <Menu fixed="top" borderless>
+          <Image className="Home-image" src="http://www.urltarget.com/images/animals-anteater-animal-ants-ant-cartoon-mammals.png" />
           <Menu.Item header>Anteater</Menu.Item>
         </Menu>
         <Grid className="Home-grid">

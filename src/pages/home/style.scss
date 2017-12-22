@@ -1,6 +1,13 @@
 @import '../../scss/variables';
 
 .Home {
+
+  &-image {
+    width: 91px;
+    height: 45px;
+    margin-left: $spacer;
+  }
+
   &-grid {
     height: calc(100vh + 1rem);
 
