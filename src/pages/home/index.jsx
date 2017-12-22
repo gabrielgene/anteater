@@ -30,10 +30,8 @@ class Home extends Component {
   }
 
   async getDataRequest() {
-    const data = await getData();
-    this.setState({
-      markers: data,
-    });
+    const markers = await getData();
+    this.setState({ markers });
   }
 
   async handleSubmit() {
@@ -50,7 +48,7 @@ class Home extends Component {
 
   handleMapChange(e) {
     const { center, zoom } = e;
-    this.setState({ center, zoom })
+    this.setState({ center, zoom });
   }
 
   handleSelectWeather(_, { value: selectedWeather }) {
@@ -58,7 +56,6 @@ class Home extends Component {
   }
 
   render() {
-
     const { center, markers, zoom, selectedWeather } = this.state;
 
     return (
@@ -76,11 +73,7 @@ class Home extends Component {
               markers={markers}
             />
           </Grid.Column>
-          <Grid.Column
-            className="Home-grid-sideview"
-            width={5}
-            color="blue"
-          >
+          <Grid.Column className="Home-grid-sideview" width={5} color="blue">
             <SideView
               onSubmit={this.handleSubmit}
               onChangeWeather={this.handleSelectWeather}
@@ -89,7 +82,7 @@ class Home extends Component {
           </Grid.Column>
         </Grid>
       </div>
-    )
+    );
   }
 }
 

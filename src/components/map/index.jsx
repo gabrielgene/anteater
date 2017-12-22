@@ -1,40 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import GoogleMapReact from 'google-map-react';
 
-import autoBind from 'react-autobind';
-
+import config from '../../config';
 import Target from './target';
-import MapMarker from './marker'
+import MapMarker from './marker';
 
 import './style.css';
 
-class Map extends Component {
-  constructor(props: Props) {
-    super(props);
-    autoBind(this);
-  }
+const renderMarkers = markers => markers.map((marker, i) => (
+  <MapMarker
+    key={i}
+    lat={marker.coords.lat}
+    lng={marker.coords.lng}
+    weather={marker.weather}
+  />
+));
 
-  renderMarkers() {
-    return this.props.markers.map((marker, i) => (
-      <MapMarker key={i} lat={marker.coords.lat} lng={marker.coords.lng} weather={marker.weather} />
-    ));
-  }
-
-  render() {
-    return (
-      <div className="Map">
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyCTHC292k7auCCGhM_9wK-ArWjNAxz80Z8' }}
-          onChange={this.props.onChange}
-          center={this.props.center}
-          defaultZoom={this.props.zoom}
-        >
-          {this.renderMarkers()}
-        </GoogleMapReact>
-        <Target />
-      </div>
-    );
-  }
-}
+const Map = ({ onChange, center, zoom, markers }) => (
+  <div className="Map">
+    <GoogleMapReact
+      bootstrapURLKeys={{ key: config.GOOGLE_MAP_API_KEY }}
+      onChange={onChange}
+      center={center}
+      defaultZoom={zoom}
+    >
+      {renderMarkers(markers)}
+    </GoogleMapReact>
+    <Target />
+  </div>
+);
 
 export default Map;
