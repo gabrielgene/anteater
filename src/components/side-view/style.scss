@@ -2,4 +2,8 @@
 
 .SideView {
   padding: $spacer*2;
+
+  &-input {
+    padding-right: $spacer*2;
+  }
 }

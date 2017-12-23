@@ -9,7 +9,7 @@ const SideView = ({ onSubmit, onChangeWeather, selectedWeather, onChangeAuthor, 
   <div className="SideView">
     <Form onSubmit={onSubmit}>
       <WeatherSelect onChange={onChangeWeather} value={selectedWeather} />
-      <Input onChange={onChangeAuthor} value={author} placeholder='Seu nome' />
+      <Input className="SideView-input" onChange={onChangeAuthor} value={author} placeholder='Seu nome' />
       <Button type="submit" disabled={!selectedWeather}>Enviar</Button>
     </Form>
   </div>
