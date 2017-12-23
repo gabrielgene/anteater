@@ -13,6 +13,7 @@ const renderMarkers = markers => markers.map((marker, i) => (
     lat={marker.coords.lat}
     lng={marker.coords.lng}
     weather={marker.weather}
+    author={marker.author}
   />
 ));
 

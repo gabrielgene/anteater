@@ -21,6 +21,7 @@ class Home extends Component {
       center: defaultCenter,
       zoom: defaultZoom,
       markers: [],
+      author: '',
     };
   }
 
@@ -39,6 +40,7 @@ class Home extends Component {
       weather: this.state.selectedWeather,
       coords: this.state.center,
       zoom: this.state.zoom,
+      author: this.state.author,
     });
 
     this.setState({
@@ -53,6 +55,10 @@ class Home extends Component {
 
   handleSelectWeather(_, { value: selectedWeather }) {
     this.setState({ selectedWeather });
+  }
+
+  handleAuthorChange(_, { value: author }) {
+    this.setState({ author });
   }
 
   render() {
@@ -77,6 +83,7 @@ class Home extends Component {
             <SideView
               onSubmit={this.handleSubmit}
               onChangeWeather={this.handleSelectWeather}
+              onChangeAuthor={this.handleAuthorChange}
               selectedWeather={selectedWeather}
             />
           </Grid.Column>
