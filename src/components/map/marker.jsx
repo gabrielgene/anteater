@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon, Popup } from 'semantic-ui-react';
+import classNames from 'classnames';
 
 const weatherLabels = { // TODO: Move to centralized mappings file
   sun: 'Sol',
@@ -11,9 +12,9 @@ const MapMarker = ({ weather, $hover, author, createdAt }) => (
   <Popup
     trigger={
       <Icon
-        className={`MapMarker ${$hover ? 'MapMarker--hover' : ''}`}
+        className={classNames('MapMarker', {'MapMarker--hover': $hover})}
         color={weather === 'sun' ? 'yellow' : 'blue'}
-        name={weather === 'sun' ? 'sun' : 'rain'}
+        name={weather}
       />
     }
     content={`
