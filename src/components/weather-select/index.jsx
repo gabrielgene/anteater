@@ -8,6 +8,7 @@ const weatherOptions = [
 
 const WeatherSelect = ({ onChange, value }) => (
   <Form.Select
+    name="selectedWeather"
     placeholder="Selecione o clima desejado"
     className="icon"
     onChange={onChange}

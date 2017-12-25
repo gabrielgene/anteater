@@ -53,12 +53,9 @@ class Home extends Component {
     this.setState({ center, zoom });
   }
 
-  handleSelectWeather(_, { value: selectedWeather }) {
-    this.setState({ selectedWeather });
-  }
-
-  handleAuthorChange(_, { value: author }) {
-    this.setState({ author });
+  handleInputChange(_, { name, value }) {
+    console.log(name, value);
+    this.setState({ [name]: value });
   }
 
   render() {
@@ -81,6 +78,7 @@ class Home extends Component {
           </Grid.Column>
           <Grid.Column className="Home-grid-sideview" width={5} color="blue">
             <SideView
+              onChange={this.handleInputChange}
               onSubmit={this.handleSubmit}
               onChangeWeather={this.handleSelectWeather}
               onChangeAuthor={this.handleAuthorChange}
